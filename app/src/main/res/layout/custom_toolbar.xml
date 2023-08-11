@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/teal_200"
+    android:elevation="4dp"
+    android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chat App"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center_vertical" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:queryHint="Search"
+        app:iconifiedByDefault="false"
+        app:showAsAction="always|collapseActionView" />
+
+    <ImageView
+        android:id="@+id/more_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/more_icon"
+        android:layout_gravity="end"
+        android:padding="12dp"
+        app:showAsAction="always" />
+
+    <!-- TabLayout -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:tabTextColor="@color/tab_unselected_color"
+        app:tabSelectedTextColor="@color/tab_selected_color"
+        app:tabIndicatorColor="@color/tab_indicator_color"
+        app:tabIndicatorHeight="4dp"
+        app:layout_collapseMode="pin" />
+
+</androidx.appcompat.widget.Toolbar>

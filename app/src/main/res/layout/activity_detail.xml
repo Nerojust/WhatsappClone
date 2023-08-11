@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.DetailActivity">
+
+
+    <ImageView
+        android:id="@+id/country_image_iv_d"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/country_name_tv_d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/country_name"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/description_tv_d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description goes here"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/continent_tv_d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continent"
+            android:textSize="40sp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
