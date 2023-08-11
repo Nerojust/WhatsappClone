@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.lessonproject.R;
+import com.example.lessonproject.views.fragments.ButterFragment;
 import com.example.lessonproject.views.fragments.ChatFragment;
 import com.example.lessonproject.views.fragments.DashboardFragment;
 import com.example.lessonproject.views.fragments.ProfileFragment;
@@ -40,12 +41,9 @@ public class WhatsappActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
 
         setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
-
+        viewPager.setCurrentItem(1);
         Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
-        TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
         ImageView searchIcon = toolbar.findViewById(R.id.search);
         ImageView moreIcon = toolbar.findViewById(R.id.more_icon);
         ImageView cameraIcon = toolbar.findViewById(R.id.camera_icon);
@@ -69,21 +67,6 @@ public class WhatsappActivity extends AppCompatActivity {
             }
         });
 
-        // Set click listener for the search view
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                // Handle search query submit
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                // Handle search query change
-//                return true;
-//            }
-//        });
-
         // Set click listener for the more icon
         moreIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,24 +76,34 @@ public class WhatsappActivity extends AppCompatActivity {
 
             }
         });
-
-        // ... Other initialization code
     }
-
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ChatFragment(), "Chat");
-        adapter.addFragment(new DashboardFragment(), "Dashboard");
-        adapter.addFragment(new ProfileFragment(), "Profile");
-        // Add more fragments here
+        adapter.addFragment(ChatFragment.newInstance("", ""), "", R.drawable.camera);
+        adapter.addFragment(ButterFragment.newInstance("", ""), "Butter", 0);
+        adapter.addFragment(DashboardFragment.newInstance("", ""), "Guys", 0);
+        adapter.addFragment(ProfileFragment.newInstance("", ""), "Profile", 0);
         viewPager.setAdapter(adapter);
+
+        // Connect TabLayout with ViewPager
+        tabLayout.setupWithViewPager(viewPager);
+
+
+        // Set custom tab views
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tab != null) {
+                tab.setCustomView(adapter.getTabView(i));
+            }
+        }
     }
 
 
-    private static class ViewPagerAdapter extends FragmentPagerAdapter {
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> fragmentList = new ArrayList<>();
         private final List<String> fragmentTitleList = new ArrayList<>();
+        private final List<Integer> tabIconResIds = new ArrayList<>();
 
         ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -126,14 +119,26 @@ public class WhatsappActivity extends AppCompatActivity {
             return fragmentList.size();
         }
 
-        void addFragment(Fragment fragment, String title) {
+        void addFragment(Fragment fragment, String title, int tabIconResId) {
             fragmentList.add(fragment);
             fragmentTitleList.add(title);
+            tabIconResIds.add(tabIconResId);
         }
 
-        @Override
         public CharSequence getPageTitle(int position) {
             return fragmentTitleList.get(position);
         }
+
+        View getTabView(int position) {
+            View tabView = getLayoutInflater().inflate(R.layout.custom_tab_item, null);
+            ImageView tabIconView = tabView.findViewById(R.id.tab_icon);
+            TextView tabTextView = tabView.findViewById(R.id.tab_text);
+
+            tabIconView.setImageResource(tabIconResIds.get(position));
+            tabTextView.setText(fragmentTitleList.get(position));
+
+            return tabView;
+        }
     }
+
 }

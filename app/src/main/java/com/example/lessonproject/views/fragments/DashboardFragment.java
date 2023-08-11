@@ -14,6 +14,13 @@ import com.example.lessonproject.R;
 
 public class DashboardFragment extends Fragment {
 
+
+    public static ChatFragment newInstance(String param1, String param2) {
+        ChatFragment fragment = new ChatFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
